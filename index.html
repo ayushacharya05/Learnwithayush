@@ -4,129 +4,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn with Ayush</title>
+    <title>Learn with Ayush | Masterclass</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ayushacharya05/Learnwithayush/refs/heads/main/images/favicon.png">
-
-<link rel="shortcut icon" href="https://raw.githubusercontent.com/ayushacharya05/Learnwithayush/refs/heads/main/images/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; }
-        .glass:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 24px; overflow: hidden; background: #000; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .hidden { display: none; }
-        .modal-overlay { background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(12px); }
-        .btn-buy { background: #facc15; color: #000; font-weight: 800; transition: 0.3s; }
-        .btn-free { background: #10b981; color: white; font-weight: 800; transition: 0.3s; }
-        
-        /* Custom scrollbar for lesson list */
-        .lesson-list::-webkit-scrollbar { width: 4px; }
-        .lesson-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        :root { --accent: #fbbf24; --bg: #020617; }
+        body { 
+            background: var(--bg); 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(251, 191, 36, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass:hover {
+            border-color: rgba(251, 191, 36, 0.3);
+            background: rgba(30, 41, 59, 0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.6s ease forwards; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
     </style>
 </head>
-<body class="pb-20">
+<body class="pb-10">
 
-    <nav class="sticky top-0 z-50 bg-slate-900/90 border-b border-white/5 px-8 py-5 flex flex-wrap justify-between items-center gap-4">
-        <h1 class="text-2xl font-black tracking-tighter cursor-pointer" onclick="location.reload()">LEARN WITH <span class="text-yellow-400">AYUSH</span></h1>
-        
-        <div class="relative w-full md:w-96">
-            <input type="text" id="searchInput" onkeyup="searchCourses()" placeholder="Search courses..." class="w-full bg-slate-800 border border-white/10 rounded-full py-2 px-5 text-sm focus:outline-none focus:border-yellow-400 transition">
-            <span class="absolute right-4 top-2 text-slate-500">🔍</span>
+    <nav class="sticky top-0 z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <h1 class="text-xl font-black tracking-tighter flex items-center gap-3 cursor-pointer group" onclick="location.reload()">
+                <div class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center text-black rotate-3 group-hover:rotate-0 transition-transform shadow-lg shadow-yellow-400/20">A</div>
+                <span class="bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent uppercase">LEARN WITH AYUSH</span>
+            </h1>
+            
+            <div class="relative w-full md:w-96 group">
+                <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-500 group-focus-within:text-yellow-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <input type="text" id="searchInput" onkeyup="searchCourses()" placeholder="Search courses..." 
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-sm focus:outline-none focus:border-yellow-400/50 transition-all text-white placeholder:text-slate-600 focus:ring-4 focus:ring-yellow-400/5">
+            </div>
         </div>
     </nav>
 
-    <div id="dashboard" class="max-w-7xl mx-auto px-6 py-16">
-        
+    <div id="dashboard" class="max-w-7xl mx-auto px-6 py-12 animate-fade">
+        <header class="mb-16">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">Master Your <br><span class="text-yellow-400">Digital Craft.</span></h2>
+            <p class="text-slate-400 text-lg max-w-2xl">High-end development courses designed for modern creators.</p>
+        </header>
+
         <section class="mb-20">
-            <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-3">
-                <span class="w-8 h-1 bg-green-500 rounded-full"></span> Free Learning Path
-            </h2>
+            <div class="flex items-center gap-4 mb-10">
+                <h3 class="text-xs font-black uppercase tracking-[0.3em] text-slate-500 whitespace-nowrap">Free Path</h3>
+                <span class="h-px w-full bg-white/5"></span>
+            </div>
             <div id="freeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
         <section>
-            <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-3">
-                <span class="w-8 h-1 bg-yellow-400 rounded-full"></span> Premium Masterclasses
-            </h2>
+            <div class="flex items-center gap-4 mb-10">
+                <h3 class="text-xs font-black uppercase tracking-[0.3em] text-yellow-400 whitespace-nowrap">Premium Masterclasses</h3>
+                <span class="h-px w-full bg-white/5"></span>
+            </div>
             <div id="paidGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </div>
 
-    <div id="authModal" class="fixed inset-0 z-50 modal-overlay hidden flex items-center justify-center p-4">
-        <div class="glass max-w-md w-full p-10 rounded-[40px] text-center relative">
-            <button onclick="closeModal()" class="absolute top-8 right-10 text-slate-500 hover:text-white transition text-xl">✕</button>
-            <h3 class="text-2xl font-black mb-2 text-yellow-400">Secure Access</h3>
-            <p class="text-slate-400 text-sm mb-8">Enter the verification code to unlock lessons.</p>
+    <div id="authModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 backdrop-blur-2xl bg-black/60">
+        <div class="glass max-w-md w-full p-8 md:p-10 rounded-[40px] text-center border-white/10 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-500 hover:text-white transition">✕</button>
             
-            <a id="mailBtn" href="#" class="block bg-white/5 border border-white/10 py-4 rounded-2xl text-xs font-bold mb-6 hover:bg-white/10 transition text-white uppercase tracking-widest">
-                Email Ayush for Access
-            </a>
+            <div class="w-20 h-20 bg-yellow-400/10 rounded-3xl flex items-center justify-center mx-auto mb-6 text-yellow-400">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <h3 class="text-2xl font-black mb-2">Unlock Access</h3>
+            <p class="text-slate-400 text-sm mb-10 leading-relaxed">Please message me on WhatsApp to purchase this course and receive your unique access code.</p>
+            
+            <div class="space-y-6">
+                <a id="waBtn" target="_blank" href="#" class="flex items-center justify-center gap-3 w-full bg-[#25D366] text-white py-5 rounded-2xl font-bold hover:opacity-90 transition shadow-lg shadow-green-500/10">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.316 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.818-.981z"/></svg>
+                    Message via WhatsApp
+                </a>
 
-            <input id="authCode" type="text" placeholder="####" class="w-full bg-slate-900 border border-white/10 rounded-2xl px-4 py-5 text-center text-3xl font-mono mb-4 focus:outline-none focus:border-yellow-400 text-white">
-            <button onclick="unlockCourse()" class="w-full bg-white text-black py-5 rounded-2xl font-black hover:bg-yellow-400 transition text-lg uppercase">Unlock Course</button>
-            <p id="authError" class="mt-4 text-red-500 text-xs font-bold hidden uppercase">Invalid Code</p>
+                <div class="pt-8 border-t border-white/10">
+                    <input id="authCode" type="text" placeholder="ENTER CODE" class="w-full bg-slate-950 border border-white/10 rounded-2xl py-5 text-center text-2xl font-mono tracking-widest mb-4 focus:border-yellow-400 outline-none transition-all placeholder:text-slate-800">
+                    <button onclick="unlockCourse()" class="w-full bg-white text-black py-4 rounded-2xl font-black text-sm uppercase hover:bg-yellow-400 transition">Verify Code</button>
+                    <p id="authError" class="mt-4 text-red-500 text-xs font-bold hidden uppercase">Invalid Access Code</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="player" class="max-w-7xl mx-auto px-6 py-12 hidden">
-        <button onclick="location.reload()" class="mb-8 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white flex items-center gap-2">
-            ← Back to Dashboard
+    <div id="player" class="max-w-7xl mx-auto px-6 py-12 hidden animate-fade">
+        <button onclick="location.reload()" class="mb-10 text-xs font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-white flex items-center gap-2 group transition">
+            <span class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/5">←</span> Dashboard
         </button>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
-                <div class="video-wrapper">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div class="lg:col-span-8">
+                <div class="video-container">
                     <iframe id="vidFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-                <h2 id="vidTitle" class="text-3xl font-black mt-8 text-yellow-400">Course Title</h2>
-                <p id="vidDesc" class="text-slate-400 mt-4 leading-relaxed">Description...</p>
+                <h2 id="vidTitle" class="text-3xl font-black mt-8 text-white">Course Title</h2>
+                <p id="vidDesc" class="text-slate-400 mt-4 leading-relaxed max-w-2xl text-lg"></p>
             </div>
 
-            <div class="glass rounded-3xl p-6 h-fit max-h-[600px] flex flex-col">
-                <h3 class="text-lg font-bold mb-4 border-b border-white/10 pb-4">Course Content</h3>
-                <div id="lessonList" class="lesson-list overflow-y-auto space-y-2">
-                    </div>
+            <div class="lg:col-span-4">
+                <div class="glass rounded-[32px] p-6 h-fit max-h-[600px] flex flex-col">
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6 flex items-center gap-2">
+                        <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div> Syllabus
+                    </h3>
+                    <div id="lessonList" class="overflow-y-auto space-y-2 pr-2"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. DATA ---
         const freeCourses = [
-            { id: "free-1", title: "ADOBE PHOTOSHOP BASIC", desc: "Intro to layers, masks, and imaging tools.", videoId: "0Iw8ICnqbbw" },
-            { id: "free-2", title: "WORDPRESS BASIC", desc: "Build high-performance WordPress sites.", videoId: "xvhor_4NAlA" }
+            { id: "free-1", title: "ADOBE PHOTOSHOP BASIC", desc: "Master layers, masks, and professional imaging tools for digital design.", videoId: "0Iw8ICnqbbw" },
+            { id: "free-2", title: "WORDPRESS CORE", desc: "Everything you need to build professional websites without writing code.", videoId: "xvhor_4NAlA" }
         ];
 
         const paidCourses = [
             {
                 id: "paid-1",
-                title: "Website Development",
-                desc: "Full Backend & Database Masterclass.",
+                title: "Backend Development",
+                desc: "Go from beginner to building complex dynamic systems with PHP and MySQL.",
                 price: 2500,
-                // NEW: Multiple lessons structure
                 lessons: [
-                    { title: "Lesson 1: Introduction to PHP", videoId: "1PnVor36_40" },
-                    { title: "Lesson 2: Database Setup with MySQL", videoId: "3_99vBvL9Yc" },
-                    { title: "Lesson 3: Securing your Backend", videoId: "2_pXGkH1x1Y" }
+                    { title: "Foundations of PHP", videoId: "1PnVor36_40" },
+                    { title: "Database Architecture", videoId: "3_99vBvL9Yc" },
+                    { title: "Security & Encryption", videoId: "2_pXGkH1x1Y" }
                 ]
             },
             {
                 id: "paid-2",
-                title: "Android w/ Kotlin",
-                desc: "Modern mobile apps with Jetpack Compose.",
+                title: "Kotlin Mobile Masterclass",
+                desc: "Build modern, fast, and native Android apps with Kotlin and Jetpack Compose.",
                 price: 4000,
-                lessons: [
-                    { title: "Lesson 1: Welcome to Kotlin", videoId: "dQw4w9WgXcQ" }
-                ]
+                lessons: [ { title: "Kotlin for Android", videoId: "dQw4w9WgXcQ" } ]
             }
         ];
 
         let activeCourse = null;
-
-        // --- 2. CORE FUNCTIONS ---
 
         function renderLibrary(filter = "") {
             const fGrid = document.getElementById('freeGrid');
@@ -135,47 +180,49 @@
 
             freeCourses.filter(c => c.title.toLowerCase().includes(filter.toLowerCase())).forEach(c => {
                 fGrid.innerHTML += `
-                    <div class="course-card glass p-8 rounded-[40px] border-green-500/10 flex flex-col justify-between">
-                        <div><h3 class="text-2xl font-bold leading-tight">${c.title}</h3><p class="text-slate-400 text-sm mt-3">${c.desc}</p></div>
-                        <button onclick="playFree('${c.id}')" class="btn-free w-full mt-10 py-4 rounded-2xl">Watch Free</button>
+                    <div class="glass p-10 rounded-[40px] flex flex-col justify-between">
+                        <div><h3 class="text-2xl font-bold mb-3">${c.title}</h3><p class="text-slate-400 text-sm leading-relaxed">${c.desc}</p></div>
+                        <button onclick="playFree('${c.id}')" class="w-full mt-10 bg-white/5 border border-white/10 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition">Start Free</button>
                     </div>`;
             });
 
             paidCourses.filter(c => c.title.toLowerCase().includes(filter.toLowerCase())).forEach(c => {
                 pGrid.innerHTML += `
-                    <div class="course-card glass p-8 rounded-[40px] border-yellow-500/10 flex flex-col justify-between">
-                        <div><h3 class="text-2xl font-bold leading-tight">${c.title}</h3><p class="text-slate-400 text-sm mt-3">${c.desc}</p></div>
-                        <div class="mt-10"><p class="text-xl font-black mb-4">Rs. ${c.price}</p>
-                        <button onclick="initAuth('${c.id}')" class="btn-buy w-full py-4 rounded-2xl">Buy & Unlock</button></div>
+                    <div class="glass p-10 rounded-[40px] flex flex-col justify-between border-yellow-400/5">
+                        <div>
+                            <div class="text-[10px] font-black text-yellow-400 uppercase tracking-widest mb-2">${c.lessons.length} Modules</div>
+                            <h3 class="text-2xl font-bold mb-3">${c.title}</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">${c.desc}</p>
+                        </div>
+                        <div class="mt-10">
+                            <div class="text-2xl font-black mb-4 tracking-tighter">Rs. ${c.price}</div>
+                            <button onclick="initAuth('${c.id}')" class="w-full bg-yellow-400 text-black py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-yellow-300 transition shadow-lg shadow-yellow-400/10">Enroll Now</button>
+                        </div>
                     </div>`;
             });
         }
 
         function searchCourses() {
-            const val = document.getElementById('searchInput').value;
-            renderLibrary(val);
+            renderLibrary(document.getElementById('searchInput').value);
         }
 
         function playFree(id) {
             const course = freeCourses.find(c => c.id === id);
-            if(course) {
-                // Free courses only have 1 video, we wrap it in an array for the player
-                startPlayer(course.title, [{ title: "Free Introduction", videoId: course.videoId }], course.desc);
-            }
+            if(course) startPlayer(course.title, [{ title: "Tutorial Overview", videoId: course.videoId }], course.desc);
         }
 
         function initAuth(id) {
             activeCourse = paidCourses.find(c => c.id === id);
-            const mailSubject = encodeURIComponent(`Buy Request: ${activeCourse.title}`);
-            const mailBody = encodeURIComponent(`Hi Ayush, I want to purchase ${activeCourse.title} for Rs.${activeCourse.price}.`);
-            document.getElementById('mailBtn').href = `mailto:contact@ayushacharya5.com.np?subject=${mailSubject}&body=${mailBody}`;
+            const phoneNumber = "9779804363914"; 
+            const msg = encodeURIComponent(`Hi Ayush, I want to buy the "${activeCourse.title}" course for Rs. ${activeCourse.price}. My name is: `);
+            document.getElementById('waBtn').href = `https://wa.me/${phoneNumber}?text=${msg}`;
             document.getElementById('authModal').classList.remove('hidden');
+            document.getElementById('authModal').classList.add('flex');
         }
 
         function unlockCourse() {
             const val = document.getElementById('authCode').value.trim();
-            const num = parseInt(val);
-            if (val === "0506" || (num >= 2002 && num <= 3000)) {
+            if (val === "0506" || (parseInt(val) >= 2002 && parseInt(val) <= 3000)) {
                 closeModal();
                 startPlayer(activeCourse.title, activeCourse.lessons, activeCourse.desc);
             } else {
@@ -189,30 +236,26 @@
             document.getElementById('vidTitle').innerText = title;
             document.getElementById('vidDesc').innerText = desc;
             
-            const lessonList = document.getElementById('lessonList');
-            lessonList.innerHTML = "";
-
-            lessons.forEach((lesson, index) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl text-sm transition bg-white/5 hover:bg-white/10 border border-white/5";
-                btn.innerHTML = `<span class="text-yellow-400 mr-2">#${index+1}</span> ${lesson.title}`;
-                btn.onclick = () => switchVideo(lesson.videoId);
-                lessonList.appendChild(btn);
+            const list = document.getElementById('lessonList');
+            list.innerHTML = "";
+            lessons.forEach((l, i) => {
+                const b = document.createElement('button');
+                b.className = "w-full text-left p-5 rounded-2xl text-sm transition bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between group";
+                b.innerHTML = `<span>${l.title}</span> <span class="text-slate-600 font-mono text-xs">0${i+1}</span>`;
+                b.onclick = () => switchVideo(l.videoId);
+                list.appendChild(b);
             });
-
             switchVideo(lessons[0].videoId);
             window.scrollTo(0,0);
         }
 
-        function switchVideo(videoId) {
-            const host = window.location.hostname || "localhost";
-            document.getElementById('vidFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&origin=${host}`;
+        function switchVideo(id) {
+            document.getElementById('vidFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
         }
 
         function closeModal() {
             document.getElementById('authModal').classList.add('hidden');
-            document.getElementById('authCode').value = "";
-            document.getElementById('authError').classList.add('hidden');
+            document.getElementById('authModal').classList.remove('flex');
         }
 
         renderLibrary();
