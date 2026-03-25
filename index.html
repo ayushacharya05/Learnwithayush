@@ -1,32 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn with Ayush | Course Library</title>
+    <title>Learn with Ayush | Pro Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body { background: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.3s; }
         .glass:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 32px; overflow: hidden; background: #000; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 24px; overflow: hidden; background: #000; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .hidden { display: none; }
         .modal-overlay { background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(12px); }
         .btn-buy { background: #facc15; color: #000; font-weight: 800; transition: 0.3s; }
-        .btn-buy:hover { background: #fde047; transform: scale(1.02); }
         .btn-free { background: #10b981; color: white; font-weight: 800; transition: 0.3s; }
-        .btn-free:hover { background: #059669; transform: scale(1.02); }
+        
+        /* Custom scrollbar for lesson list */
+        .lesson-list::-webkit-scrollbar { width: 4px; }
+        .lesson-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 <body class="pb-20">
 
-    <nav class="sticky top-0 z-50 bg-slate-900/90 border-b border-white/5 px-8 py-5 flex justify-between items-center">
+    <nav class="sticky top-0 z-50 bg-slate-900/90 border-b border-white/5 px-8 py-5 flex flex-wrap justify-between items-center gap-4">
         <h1 class="text-2xl font-black tracking-tighter cursor-pointer" onclick="location.reload()">LEARN WITH <span class="text-yellow-400">AYUSH</span></h1>
-        <div class="flex items-center gap-4">
-            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] hidden md:block">Skill Up. Scale Up.</span>
-            <div class="h-2 w-2 rounded-full bg-yellow-400 animate-pulse"></div>
+        
+        <div class="relative w-full md:w-96">
+            <input type="text" id="searchInput" onkeyup="searchCourses()" placeholder="Search courses..." class="w-full bg-slate-800 border border-white/10 rounded-full py-2 px-5 text-sm focus:outline-none focus:border-yellow-400 transition">
+            <span class="absolute right-4 top-2 text-slate-500">🔍</span>
         </div>
     </nav>
 
@@ -36,134 +40,132 @@
             <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-3">
                 <span class="w-8 h-1 bg-green-500 rounded-full"></span> Free Learning Path
             </h2>
-            <div id="freeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                </div>
+            <div id="freeGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
         <section>
             <h2 class="text-3xl font-extrabold mb-8 flex items-center gap-3">
                 <span class="w-8 h-1 bg-yellow-400 rounded-full"></span> Premium Masterclasses
             </h2>
-            <div id="paidGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                </div>
+            <div id="paidGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
     </div>
 
     <div id="authModal" class="fixed inset-0 z-50 modal-overlay hidden flex items-center justify-center p-4">
-        <div class="glass max-w-md w-full p-10 md:p-12 rounded-[56px] text-center relative">
+        <div class="glass max-w-md w-full p-10 rounded-[40px] text-center relative">
             <button onclick="closeModal()" class="absolute top-8 right-10 text-slate-500 hover:text-white transition text-xl">✕</button>
-            <h3 class="text-2xl font-black mb-2 text-yellow-400 tracking-tight">Secure Access</h3>
-            <p class="text-slate-400 text-sm mb-10">This premium content requires a verification code.</p>
+            <h3 class="text-2xl font-black mb-2 text-yellow-400">Secure Access</h3>
+            <p class="text-slate-400 text-sm mb-8">Enter the verification code to unlock lessons.</p>
             
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">Step 1: Get Your Code</p>
-            <a id="mailBtn" href="#" class="block bg-white/5 border border-white/10 py-4 rounded-2xl text-xs font-bold mb-8 hover:bg-white/10 transition tracking-widest uppercase text-white">
-                Email Ayush for Code
+            <a id="mailBtn" href="#" class="block bg-white/5 border border-white/10 py-4 rounded-2xl text-xs font-bold mb-6 hover:bg-white/10 transition text-white uppercase tracking-widest">
+                Email Ayush for Access
             </a>
 
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-2">Step 2: Enter Code</p>
-            <input id="authCode" type="text" placeholder="####" class="w-full bg-slate-900 border border-white/10 rounded-2xl px-4 py-5 text-center text-3xl font-mono tracking-[0.4em] mb-4 focus:outline-none focus:border-yellow-400 transition text-white">
-            <button onclick="unlockCourse()" class="w-full bg-white text-black py-5 rounded-2xl font-black hover:bg-yellow-400 transition text-lg">Unlock Now</button>
-            <p id="authError" class="mt-4 text-red-500 text-xs font-bold hidden tracking-widest uppercase">Invalid Code</p>
+            <input id="authCode" type="text" placeholder="####" class="w-full bg-slate-900 border border-white/10 rounded-2xl px-4 py-5 text-center text-3xl font-mono mb-4 focus:outline-none focus:border-yellow-400 text-white">
+            <button onclick="unlockCourse()" class="w-full bg-white text-black py-5 rounded-2xl font-black hover:bg-yellow-400 transition text-lg uppercase">Unlock Course</button>
+            <p id="authError" class="mt-4 text-red-500 text-xs font-bold hidden uppercase">Invalid Code</p>
         </div>
     </div>
 
-    <div id="player" class="max-w-6xl mx-auto px-6 py-12 hidden">
-        <button onclick="location.reload()" class="mb-10 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white flex items-center gap-2">
+    <div id="player" class="max-w-7xl mx-auto px-6 py-12 hidden">
+        <button onclick="location.reload()" class="mb-8 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-white flex items-center gap-2">
             ← Back to Dashboard
         </button>
-        <div class="video-wrapper">
-            <iframe id="vidFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="video-wrapper">
+                    <iframe id="vidFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <h2 id="vidTitle" class="text-3xl font-black mt-8 text-yellow-400">Course Title</h2>
+                <p id="vidDesc" class="text-slate-400 mt-4 leading-relaxed">Description...</p>
+            </div>
+
+            <div class="glass rounded-3xl p-6 h-fit max-h-[600px] flex flex-col">
+                <h3 class="text-lg font-bold mb-4 border-b border-white/10 pb-4">Course Content</h3>
+                <div id="lessonList" class="lesson-list overflow-y-auto space-y-2">
+                    </div>
+            </div>
         </div>
-        <h2 id="vidTitle" class="text-4xl font-black mt-10 text-yellow-400">Course Title</h2>
-        <p id="vidDesc" class="text-slate-400 mt-4 text-lg max-w-3xl leading-relaxed">Description content goes here.</p>
     </div>
 
     <script>
-        // --- 1. FREE COURSES DATA ---
+        // --- 1. DATA ---
         const freeCourses = [
-            {
-                id: "free-1",
-                title: "ADOBE PHOTOSHOP BASIC",
-                desc: "A comprehensive introduction to Adobe Photoshop, covering layers, masks, and professional imaging tools.",
-                videoId: "0Iw8ICnqbbw" 
-            },
-            {
-                id: "free-2",
-                title: "WORDPRESS BASIC",
-                desc: "Learn to build high-performance WordPress sites with professional visual assets and SEO-friendly structures.",
-                videoId: "xvhor_4NAlA" 
-            }
+            { id: "free-1", title: "ADOBE PHOTOSHOP BASIC", desc: "Intro to layers, masks, and imaging tools.", videoId: "0Iw8ICnqbbw" },
+            { id: "free-2", title: "WORDPRESS BASIC", desc: "Build high-performance WordPress sites.", videoId: "xvhor_4NAlA" }
         ];
 
-        // --- 2. PAID COURSES DATA ---
         const paidCourses = [
             {
                 id: "paid-1",
                 title: "Website Development",
-                desc: "Deep dive into PHP, MySQL database management, and professional Backend security protocols.",
+                desc: "Full Backend & Database Masterclass.",
                 price: 2500,
-                videoId: "1PnVor36_40" 
+                // NEW: Multiple lessons structure
+                lessons: [
+                    { title: "Lesson 1: Introduction to PHP", videoId: "1PnVor36_40" },
+                    { title: "Lesson 2: Database Setup with MySQL", videoId: "3_99vBvL9Yc" },
+                    { title: "Lesson 3: Securing your Backend", videoId: "2_pXGkH1x1Y" }
+                ]
             },
             {
                 id: "paid-2",
                 title: "Android w/ Kotlin",
-                desc: "Build modern, high-performance mobile applications using Kotlin and Jetpack Compose.",
+                desc: "Modern mobile apps with Jetpack Compose.",
                 price: 4000,
-                videoId: "dQw4w9WgXcQ" 
+                lessons: [
+                    { title: "Lesson 1: Welcome to Kotlin", videoId: "dQw4w9WgXcQ" }
+                ]
             }
         ];
 
-        let pendingCourse = null;
+        let activeCourse = null;
 
-        function renderLibrary() {
+        // --- 2. CORE FUNCTIONS ---
+
+        function renderLibrary(filter = "") {
             const fGrid = document.getElementById('freeGrid');
             const pGrid = document.getElementById('paidGrid');
+            fGrid.innerHTML = ""; pGrid.innerHTML = "";
 
-            freeCourses.forEach(c => {
+            freeCourses.filter(c => c.title.toLowerCase().includes(filter.toLowerCase())).forEach(c => {
                 fGrid.innerHTML += `
-                    <div class="glass p-8 rounded-[40px] border-green-500/10 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold leading-tight">${c.title}</h3>
-                            <p class="text-slate-400 text-sm mt-3 leading-relaxed">${c.desc}</p>
-                        </div>
+                    <div class="course-card glass p-8 rounded-[40px] border-green-500/10 flex flex-col justify-between">
+                        <div><h3 class="text-2xl font-bold leading-tight">${c.title}</h3><p class="text-slate-400 text-sm mt-3">${c.desc}</p></div>
                         <button onclick="playFree('${c.id}')" class="btn-free w-full mt-10 py-4 rounded-2xl">Watch Free</button>
                     </div>`;
             });
 
-            paidCourses.forEach(c => {
+            paidCourses.filter(c => c.title.toLowerCase().includes(filter.toLowerCase())).forEach(c => {
                 pGrid.innerHTML += `
-                    <div class="glass p-8 rounded-[40px] border-yellow-500/10 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold leading-tight">${c.title}</h3>
-                            <p class="text-slate-400 text-sm mt-3 leading-relaxed">${c.desc}</p>
-                        </div>
-                        <div class="mt-10">
-                            <p class="text-xl font-black mb-4">Rs. ${c.price}</p>
-                            <button onclick="initAuth('${c.id}')" class="btn-buy w-full py-4 rounded-2xl">Buy & Unlock</button>
-                        </div>
+                    <div class="course-card glass p-8 rounded-[40px] border-yellow-500/10 flex flex-col justify-between">
+                        <div><h3 class="text-2xl font-bold leading-tight">${c.title}</h3><p class="text-slate-400 text-sm mt-3">${c.desc}</p></div>
+                        <div class="mt-10"><p class="text-xl font-black mb-4">Rs. ${c.price}</p>
+                        <button onclick="initAuth('${c.id}')" class="btn-buy w-full py-4 rounded-2xl">Buy & Unlock</button></div>
                     </div>`;
             });
         }
 
-        function playFree(id) {
-            const course = freeCourses.find(c => c.id === id);
-            if(course) startPlayer(course.title, course.videoId, course.desc);
+        function searchCourses() {
+            const val = document.getElementById('searchInput').value;
+            renderLibrary(val);
         }
 
-        function initAuth(id) {
-            pendingCourse = paidCourses.find(c => c.id === id);
-            if(pendingCourse) {
-                const mailSubject = encodeURIComponent(`Buy Request: ${pendingCourse.title}`);
-                const mailBody = encodeURIComponent(`Hi Ayush, I want to purchase ${pendingCourse.title} for Rs.${pendingCourse.price}.`);
-                document.getElementById('mailBtn').href = `mailto:contact@ayushacharya5.com.np?subject=${mailSubject}&body=${mailBody}`;
-                document.getElementById('authModal').classList.remove('hidden');
+        function playFree(id) {
+            const course = freeCourses.find(c => c.id === id);
+            if(course) {
+                // Free courses only have 1 video, we wrap it in an array for the player
+                startPlayer(course.title, [{ title: "Free Introduction", videoId: course.videoId }], course.desc);
             }
         }
 
-        function closeModal() {
-            document.getElementById('authModal').classList.add('hidden');
-            document.getElementById('authCode').value = "";
-            document.getElementById('authError').classList.add('hidden');
+        function initAuth(id) {
+            activeCourse = paidCourses.find(c => c.id === id);
+            const mailSubject = encodeURIComponent(`Buy Request: ${activeCourse.title}`);
+            const mailBody = encodeURIComponent(`Hi Ayush, I want to purchase ${activeCourse.title} for Rs.${activeCourse.price}.`);
+            document.getElementById('mailBtn').href = `mailto:contact@ayushacharya5.com.np?subject=${mailSubject}&body=${mailBody}`;
+            document.getElementById('authModal').classList.remove('hidden');
         }
 
         function unlockCourse() {
@@ -171,23 +173,42 @@
             const num = parseInt(val);
             if (val === "0506" || (num >= 2002 && num <= 3000)) {
                 closeModal();
-                if(pendingCourse) startPlayer(pendingCourse.title, pendingCourse.videoId, pendingCourse.desc);
+                startPlayer(activeCourse.title, activeCourse.lessons, activeCourse.desc);
             } else {
                 document.getElementById('authError').classList.remove('hidden');
             }
         }
 
-        function startPlayer(title, videoId, desc) {
+        function startPlayer(title, lessons, desc) {
             document.getElementById('dashboard').classList.add('hidden');
             document.getElementById('player').classList.remove('hidden');
             document.getElementById('vidTitle').innerText = title;
             document.getElementById('vidDesc').innerText = desc;
             
-            // Fixed Origin logic for better embedding
+            const lessonList = document.getElementById('lessonList');
+            lessonList.innerHTML = "";
+
+            lessons.forEach((lesson, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl text-sm transition bg-white/5 hover:bg-white/10 border border-white/5";
+                btn.innerHTML = `<span class="text-yellow-400 mr-2">#${index+1}</span> ${lesson.title}`;
+                btn.onclick = () => switchVideo(lesson.videoId);
+                lessonList.appendChild(btn);
+            });
+
+            switchVideo(lessons[0].videoId);
+            window.scrollTo(0,0);
+        }
+
+        function switchVideo(videoId) {
             const host = window.location.hostname || "localhost";
             document.getElementById('vidFrame').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&origin=${host}`;
-            
-            window.scrollTo(0,0);
+        }
+
+        function closeModal() {
+            document.getElementById('authModal').classList.add('hidden');
+            document.getElementById('authCode').value = "";
+            document.getElementById('authError').classList.add('hidden');
         }
 
         renderLibrary();
