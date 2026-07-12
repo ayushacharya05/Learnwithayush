@@ -175,8 +175,8 @@
                         <h3 class="text-xl font-bold mb-1">Email Support</h3>
                         <p class="text-xs text-slate-400 mb-6">Drop an email for general inquiries or payment assistance.</p>
                     </div>
-                    <a href="mailto:contact@ayushacharya5.com.np" class="w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 py-3 rounded-xl text-xs font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black transition break-all">
-                        contact@ayushacharya5.com.np
+                    <a href="/cdn-cgi/l/email-protection#a1c2cecfd5c0c2d5e1c0d8d4d2c9c0c2c9c0d3d8c0948fc2cecc8fcfd1" class="w-full bg-white/5 border border-white/10 hover:border-yellow-400/50 py-3 rounded-xl text-xs font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black transition break-all">
+                        <span class="__cf_email__" data-cfemail="63000c0d1702001723021a16100b02000b02111a02564d000c0e4d0d13">[email&#160;protected]</span>
                     </a>
                 </div>
 
@@ -253,41 +253,50 @@
     <footer class="border-t border-white/5 py-8 px-6 text-center text-slate-500 text-xs">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>© Learn with Ayush. All rights reserved.</p>
-            <p>Designed & Developed by <a href="mailto:contact@ayushacharya5.com.np" class="text-slate-400 hover:text-yellow-400 transition">Ayush Acharya</a></p>
+            <p>Designed & Developed by <a href="/cdn-cgi/l/email-protection#01626e6f7560627541607874726960626960737860342f626e6c2f6f71" class="text-slate-400 hover:text-yellow-400 transition">Ayush Acharya</a></p>
         </div>
     </footer>
 
     <!-- JavaScript Logic -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-   const freeCourses = [];
-
-const paidCourses = [
-    {
-        id: "paid-1",
-        title: "AI Prompt Engineering",
-        desc: "Learn to communicate effectively with Artificial Intelligence models and construct advanced prompts in Nepali.",
-        price: 1000,
-        lessons: [
-            { title: "01. Overview to AI", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=2026-07-08_11-47-20_pv1vo4" },
-            { title: "02. Overview to AI Prompt Engineering", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=AI_PROMPT_OVERVIEW_vvwrhx" },
-            { title: "03. Using Different Prompt Types in ChatGPT, Claude, and Gemini", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Lesson_3_Using_Different_Prompt_Types_in_ChatGPT_Claude_and_Gemini_c3xmuv" }
-        ]
-    },
- {
-    id: "paid-2",
-    title: "Website Development",
-    desc: "Master HTML, CSS, and JavaScript to build fully responsive and dynamic websites from scratch.",
-    price: 1500,
-    lessons: [
-        { title: "01. Introduction to Web Development & HTML", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Lesson_1_-Web_Development_p1gwrb" },
-        { title: "02. CSS Fundamentals & Styling Basics", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
-        { title: "03. Modern Layouts with Flexbox & CSS Grid", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
-        { title: "04. Building Responsive Websites for Mobile", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
-        { title: "05. JavaScript Basics & DOM Manipulation", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
-        { title: "06. Building & Deploying Your First Complete Project", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" }
-    ]
-}
-];
+        const freeCourses = [];
+        
+        // EVERYTHING FOR A COURSE IS grouped HERE: (Title, Description, Price, Passcodes, and Video URLs)
+        const paidCourses = [
+            {
+                id: "paid-1",
+                title: "AI Prompt Engineering",
+                desc: "Learn to communicate effectively with Artificial Intelligence models and construct advanced prompts in Nepali.",
+                price: 1000,
+                passcodes: [
+                    "0506", 
+                    { start: 2002, end: 2058 }
+                ],
+                lessons: [
+                    { title: "01. Overview to AI", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=2026-07-08_11-47-20_pv1vo4" },
+                    { title: "02. Overview to AI Prompt Engineering", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=AI_PROMPT_OVERVIEW_vvwrhx" },
+                    { title: "03. Using Different Prompt Types in ChatGPT, Claude, and Gemini", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Lesson_3_Using_Different_Prompt_Types_in_ChatGPT_Claude_and_Gemini_c3xmuv" }
+                ]
+            }, 
+            {
+                id: "paid-2",
+                title: "Website Development",
+                desc: "Master HTML, CSS, and JavaScript to build fully responsive and dynamic websites from scratch.",
+                price: 1500,
+                passcodes: [
+                    { start: 2059, end: 2089 }
+                ],
+                lessons: [
+                    { title: "01. Introduction to Web Development & HTML", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Lesson_1_-Web_Development_p1gwrb" },
+                    { title: "02. CSS Fundamentals & Styling Basics", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
+                    { title: "03. Modern Layouts with Flexbox & CSS Grid", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
+                    { title: "04. Building Responsive Websites for Mobile", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
+                    { title: "05. JavaScript Basics & DOM Manipulation", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" },
+                    { title: "06. Building & Deploying Your First Complete Project", videoId: "https://player.cloudinary.com/embed/?cloud_name=vwcie5rc&public_id=Comming_soon_lmf4im" }
+                ]
+            }
+        ];
 
         let activeCourse = null;
 
@@ -347,6 +356,15 @@ const paidCourses = [
                     el.classList.add('hidden');
                 }
             });
+
+            // Destroy video frame and stop playback on navigation away from player
+            if (sectionId !== 'player') {
+                const wrapper = document.getElementById('mediaWrapper');
+                if (wrapper) {
+                    wrapper.innerHTML = '';
+                }
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -368,7 +386,24 @@ const paidCourses = [
 
         function unlockCourse() {
             const val = document.getElementById('authCode').value.trim();
-            if (val === "0506" || (parseInt(val) >= 2002 && parseInt(val) <= 3000)) {
+            const numVal = parseInt(val, 10);
+
+            if (!activeCourse || !activeCourse.passcodes) {
+                document.getElementById('authError').classList.remove('hidden');
+                return;
+            }
+
+            // Verify passcode against course's passcodes array
+            const isValid = activeCourse.passcodes.some(item => {
+                if (typeof item === 'string') {
+                    return item === val;
+                } else if (typeof item === 'object' && item.start !== undefined && item.end !== undefined) {
+                    return !isNaN(numVal) && numVal >= item.start && numVal <= item.end;
+                }
+                return false;
+            });
+
+            if (isValid) {
                 closeModal();
                 startPlayer(activeCourse.title, activeCourse.lessons, activeCourse.desc);
             } else {
@@ -422,5 +457,6 @@ const paidCourses = [
         // Initialize library on load
         renderLibrary();
     </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b20fbb14051e4dad99d13f71779b4a7c","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
